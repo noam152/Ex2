@@ -1,4 +1,4 @@
-// Add your documentation below:
+// Add your documentation below: noam braun
 
 public class SCell implements Cell {
     private String line;
