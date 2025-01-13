@@ -1,3 +1,5 @@
+import com.sun.source.tree.AssertTree;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -79,11 +81,26 @@ class myCellTest {
     }
     @Test
     void lastOperator() {
-        String[] operators = {"(3 + 2) * (5 - 4)","(a + (b / c) + d)","3+4","7-4/2"};
-        int[] compare = {7,6,2,4};
-        for (int i = 0; i < operators.length; i = i + 1) {
-            compare[i]=myCell.lastOp(operators[i]);
-            assertEquals(compare[i], compare[i]);
-        }
+        assertEquals(1, myCell.lastOp("1+2"));
+        assertEquals(1, myCell.lastOp("3-4"));
+        assertEquals(1, myCell.lastOp("5*6"));
+        assertEquals(1, myCell.lastOp("7/8"));
+        assertEquals(5, myCell.lastOp("1+2*3-4")); // '-' הוא האופרטור הראשי האחרון
+        assertEquals(7, myCell.lastOp("(1+2)*3-4")); // '-' הוא האופרטור הראשי האחרון
+        assertEquals(5, myCell.lastOp("(1+2)*(3+4)"));
+    }
+    @Test
+    void xCell(){
+        assertEquals(Spreadsheet.xCell("Z13"),25);
+        assertEquals(Spreadsheet.xCell("c13"),2);
+        assertEquals(Spreadsheet.xCell("AA13"),-1);
+        assertEquals(Spreadsheet.xCell("er13"),-1);
+    }
+    @Test
+    void yCell(){
+        assertEquals(Spreadsheet.yCell("x99"),99);
+        assertEquals(Spreadsheet.yCell("v34"),34);
+        assertEquals(Spreadsheet.yCell("r100"),-1);
+        assertEquals(Spreadsheet.yCell("n5"),5);
     }
 }

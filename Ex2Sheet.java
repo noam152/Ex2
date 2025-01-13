@@ -15,6 +15,22 @@ public class Ex2Sheet implements Sheet {
         }
         eval();
     }
+    public double evaluate(String s) {
+        double result = 0;
+        for(int i=0;i<table.length;i++) {
+            for(int j=0;j<table[i].length;j++) {
+                if(isNumber(s)){
+                    try {
+                        Double d = Double.parseDouble(s);
+                        result = result + d;
+                        return result;
+                    }
+                    catch(NumberFormatException e){}
+                }
+            }
+        }
+        return result;
+    }
     public Ex2Sheet() {
         this(Ex2Utils.WIDTH, Ex2Utils.HEIGHT);
     }
@@ -67,6 +83,17 @@ public class Ex2Sheet implements Sheet {
         // Add your code here
 
         // ///////////////////
+    }
+    public static boolean isNumber(String value) {
+        if (value.isEmpty() || value == null) {
+            return false;
+        }
+        try {
+            Double.parseDouble(value);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     @Override
